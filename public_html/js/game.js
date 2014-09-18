@@ -35,7 +35,7 @@ function initWorld(world) {
 function step(cnt) {
     var timeStep = 1.0 / 60;
     var iteration = 1;
-//    world.Step(timeStep, iteration);
+    world.Step(timeStep, iteration);
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     render(ctx);
     setTimeout('step(' + (cnt || 0) + ')', 10);
@@ -55,7 +55,7 @@ Event.observe(window, 'load', function() {
 });
 
 Event.observe(window, 'click', function() {
-//    level.objects[3].bodyRef.m_position.Set(100, 100);
+    level.objects[3].bodyRef.m_position.Set(100, 100);
     level.objects[3].bodyRef.m_position.x = 100;
     level.objects[3].bodyRef.m_position.y = 100;
 });
