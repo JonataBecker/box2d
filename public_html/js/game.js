@@ -21,11 +21,7 @@ function initWorld(world) {
             borderWidth: 1,
             bodyRef: null,
         }, object);
-        switch(object.shape) {
-            case 'rect':
-                 createRect(world, object.x, object.y, object.width, object.height, object.static, object);
-                 break;
-        }
+        createObject(world, object);
         
         level.objects[i]= object;
     }
@@ -55,7 +51,5 @@ Event.observe(window, 'load', function() {
 });
 
 Event.observe(window, 'click', function() {
-    level.objects[3].bodyRef.m_position.Set(100, 100);
-    level.objects[3].bodyRef.m_position.x = 100;
-    level.objects[3].bodyRef.m_position.y = 100;
+    level.objects[3].bodyRef.m_position.Set(500, 100);
 });

@@ -1,10 +1,97 @@
+/**
+ * Renderiza os objetos
+ *
+ * @param {type} context
+ * @returns {undefined}
+ */
 function render(context) {
     for (i = 0; i < level.objects.length; i++) {
+//        renderObject(context, level.objects[i]);
         for (var s = level.objects[i].bodyRef.GetShapeList(); s != null; s = s.GetNext()) {
             drawShape(s, context);
         }
     }
 }
+
+/**
+ * Renderiza um objeto
+ *
+ * @param {type} context
+ * @param {type} object
+ * @returns {undefined}
+ */
+function renderObject(context, object) {
+    context.fillStyle = object.color;
+    context.strokeStyle = object.borderColor;
+    context.lineWidth = object.borderWidth;
+
+    // Inicializa as propriedades do objeto
+    var pos = {x: object.x, y: object.y};
+    // Se existe um corpo Box2D vinculado
+    if(object.bodyRef !== undefined) {
+        pos = object.bodyRef.m_position;
+    }
+
+    context.beginPath();
+    switch (object.shape) {
+        case 'ball':
+            var r = object.radius;
+
+            var segments = r + 5;
+            var theta = 0.0;
+            var dtheta = 2.0 * Math.PI / segments;
+            // draw circle
+            context.moveTo(pos.x + r, pos.y);
+            for (var i = 0; i < segments; i++) {
+                var d = new b2Vec2(r * Math.cos(theta), r * Math.sin(theta));
+                var v = b2Math.AddVV(pos, d);
+                context.lineTo(v.x, v.y);
+                theta += dtheta;
+            }
+            context.lineTo(pos.x + r, pos.y);
+            break;
+        case 'rect':
+            // Inicializa as propriedades do objeto
+            var width = object.width;
+            var height = object.height;
+
+            var w = width / 2;
+            var h = height / 2;
+
+            // draw circle
+            context.moveTo(pos.x - w, pos.y - h);
+
+            context.lineTo(pos.x + w, pos.y - h);
+            context.lineTo(pos.x + w, pos.y + h);
+            context.lineTo(pos.x - w, pos.y + h);
+            context.lineTo(pos.x - w, pos.y - h);
+
+
+            break;
+        case 'shape':
+            // Inicializa as propriedades do objeto
+            var width = object.width;
+            var height = object.height;
+            // draw circle
+            context.moveTo(pos.x, pos.y);
+
+//            var w =
+
+            context.lineTo(pos.x + width, pos.y);
+            context.lineTo(pos.x + width, pos.y + height);
+            context.lineTo(pos.x, pos.y + height);
+            context.lineTo(pos.x, pos.y);
+
+
+            break;
+    }
+
+    context.fill();
+    context.stroke();
+
+    context.restore();
+}
+
 
 function drawShape(shape, context) {
     context.fillStyle = shape.m_userData.color;
@@ -18,7 +105,7 @@ function drawShape(shape, context) {
                 var circle = shape;
                 var pos = circle.m_position;
                 var r = circle.m_radius;
-                var segments = 32.0;
+                var segments = r + 5;
                 var theta = 0.0;
                 var dtheta = 2.0 * Math.PI / segments;
                 // draw circle
@@ -51,7 +138,7 @@ function drawShape(shape, context) {
             }
             break;
     }
-    context.stroke();
     context.fill();
+    context.stroke();
 }
 
