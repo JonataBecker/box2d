@@ -9,10 +9,9 @@ CopyRight Rech Informática Ltda. Todos os direitos reservados.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/editor.css" rel="stylesheet">		
-		
-		
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/editor.css" rel="stylesheet">		
+
         <script src="js/lib/prototype-1.6.0.2.js"></script>
         <!-- Declaração de classes do Box2D. Manter nesta ordem -->
         <script src='js/box2d/common/b2Settings.js'></script>
@@ -79,70 +78,33 @@ CopyRight Rech Informática Ltda. Todos os direitos reservados.
         <script src='js/box2d/dynamics/joints/b2PulleyJointDef.js'></script>
         <script src='js/box2d/dynamics/joints/b2RevoluteJoint.js'></script>
         <script src='js/box2d/dynamics/joints/b2RevoluteJointDef.js'></script>
-
-		<script src="js/jquery-2.1.1.min.js"></script>
-		<script>
-			$.noConflict();
-			
-			jQuery(document).ready(function() {
-				var width = jQuery('.tela').width();
-				var height = jQuery('.tela').height();
-				jQuery('.tela canvas').attr('width', width);
-				jQuery('.tela canvas').attr('height', height);
-				
-				
-				fundo();
-				
-			});
-			
-			
-			var fundo = function(width, height) {
-				var boxExt = 30;
-				var boxInt = 10;
-				
-				
-			
-				for ()
-			
-				var drawing = document.getElementById("tela_background");
-				var con = drawing.getContext("2d");
-				con.strokeStyle="#BBB";
-				con.lineWidth = "0.8";
-				con.strokeRect(1, 1, 30, 30);
-
-				var con2 = drawing.getContext("2d");
-				con2.strokeStyle="#BBB";
-				con2.lineWidth = "0.2";
-				con2.strokeRect(1, 1, 10, 10);
-
-			};
-			
-		</script>		
+        <script src="js/jquery-2.1.1.min.js"></script>
+        <script>
+            $.noConflict();
+        </script>		
         <script src='js/utils.js'></script>
         <script src='js/renderer.js'></script>
         <script src='js/testlevel.js'></script>
         <script src='js/objectFactory.js'></script>
         <script src='js/editor.js'></script>
+        <script src='js/palco.js'></script>
         <!--<script src='js/game.js'></script>-->
-
-
     </head>
     <body>
-		<div class="main">
-			<div class="painel">
-				<ul>
-					<li><a href="" title="">1</a></li>
-					<li><a href="" title="">2</a></li>
-					<li><a href="" title="">3</a></li>
-					<li class="sep"></li>
-				</ul>
-			</div>
-			<div class="box_tela">
-				<div class="tela">
-					<canvas id="tela_background"></canvas>
-					<canvas id="canvas"></canvas>
-				</div>
-			</div>
-		</div>
+        <div class="main">
+            <div class="painel">
+                <ul>
+                    <li><a href="" title="">1</a></li>
+                    <li><a href="" title="">2</a></li>
+                    <li><a href="" title="">3</a></li>
+                    <li class="sep"></li>
+                </ul>
+            </div>
+            <div class="box_palco">
+                <div class="palco">
+                    <canvas id="palco"></canvas>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
