@@ -35,7 +35,7 @@ function createObject(world, object) {
             createBall(world, object);
             break;
         case 'poly':
-            createPolygon(world, object);
+            createPoly(world, object);
             break;
     }
 }
@@ -90,7 +90,7 @@ function createBall(world, object) {
  * @param {type} world
  * @param {type} object
  */
-function createPolygon(world, object) {
+function createPoly(world, object) {
     var polySd = new b2PolyDef();
     if (!object.static)
         polySd.density = 1.0;
@@ -106,37 +106,6 @@ function createPolygon(world, object) {
     polyBd.AddShape(polySd);
     polyBd.rotation = object.rotation;
     polyBd.position.Set(object.x, object.y);
-    object.bodyRef = world.CreateBody(polyBd);
-}
-;
-
-/**
- * Cria um polígono
- *
- * @param {type} world
- * @param {type} x
- * @param {type} y
- * @param {type} points
- * @param {type} fixed
- * @param {type} object
- * @returns {undefined}
- */
-function createPoly(world, x, y, points, fixed, object) {
-    var polySd = new b2PolyDef();
-    if (!fixed)
-        polySd.density = 1.0;
-    polySd.restitution = 0.2;
-    polySd.vertexCount = points.length;
-    polySd.userData = object;
-    for (var i = 0; i < points.length; i++) {
-        polySd.vertices[i].Set(points[i][0], points[i][1]);
-    }
-
-
-    var polyBd = new b2BodyDef();
-    polyBd.AddShape(polySd);
-    ballBd.rotation = object.rotation;
-    polyBd.position.Set(x, y);
     object.bodyRef = world.CreateBody(polyBd);
 }
 ;
