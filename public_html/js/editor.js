@@ -7,13 +7,22 @@ var canvasLeft;
 var teste;
 
 Event.observe(window, 'load', function() {
+    
+    for(i = 0; i < level.objects.length; i++) {
+        object = level.objects[i];
+        
+        object = merge({
+            rotation : 0,
+            color: '#AABBFF',
+            borderColor: '#88A0FF',
+            borderWidth: 1,
+        }, object);
+        
+        level.objects[i] = object;
+    }
+
+    
     ctx = $('canvas').getContext('2d');
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    render(ctx);
-});
-
-Event.observe(window, 'click', function() {
-    level.objects[3].x = 500;
-    level.objects[3].y = 100;
     render(ctx);
 });

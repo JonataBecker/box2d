@@ -25,7 +25,7 @@ function createObject(world, object) {
     switch (object.shape) {
 
         case 'shape':
-            createTestShape(world, object);
+            createPlayer(world, object);
             break;
 
         case 'rect':
@@ -59,49 +59,10 @@ function createRect(world, object) {
     ballBd.AddShape(boxSd);
 
     ballBd.position.Set(object.x, object.y);
+    ballBd.rotation = object.rotation;
     object.bodyRef = world.CreateBody(ballBd);
 }
-
-/**
- * Cria uma bola
- *
- * @param {type} world
- * @param {type} object
- */
-function createTestShape(world, object) {
-    var ballSd1 = new b2CircleDef();
-    if (!object.static)
-        ballSd1.density = 1.0;
-    ballSd1.radius = 10;
-    ballSd1.restitution = 0.2;
-    ballSd1.userData = object;
-
-    var ballSd2 = new b2CircleDef();
-    if (!object.static)
-        ballSd2.density = 1.0;
-    ballSd2.localPosition.Set(0, 40);
-    ballSd2.radius = 10;
-    ballSd2.restitution = 0.2;
-    ballSd2.userData = object;
-
-    var boxSd = new b2BoxDef();
-    console.log(boxSd);
-    if (!object.static)
-        boxSd.density = 1.0;
-    boxSd.localPosition.Set(0, 20);
-    boxSd.extents.Set(10, 20);
-    boxSd.restitution = 0.2;
-    boxSd.userData = object;
-
-    var ballBd = new b2BodyDef();
-    ballBd.AddShape(ballSd1);
-    ballBd.AddShape(ballSd2);
-    ballBd.AddShape(boxSd);
-
-    ballBd.position.Set(object.x, object.y);
-    object.bodyRef = world.CreateBody(ballBd);
-};
-
+    
 /**
  * Cria uma bola
  *
@@ -118,6 +79,7 @@ function createBall(world, object) {
     var ballBd = new b2BodyDef();
     ballBd.AddShape(ballSd);
 
+    ballBd.rotation = object.rotation;
     ballBd.position.Set(object.x, object.y);
     object.bodyRef = world.CreateBody(ballBd);
 };
@@ -142,6 +104,7 @@ function createPolygon(world, object) {
 
     var polyBd = new b2BodyDef();
     polyBd.AddShape(polySd);
+    polyBd.rotation = object.rotation;
     polyBd.position.Set(object.x, object.y);
     object.bodyRef = world.CreateBody(polyBd);
 }
@@ -172,6 +135,7 @@ function createPoly(world, x, y, points, fixed, object) {
 
     var polyBd = new b2BodyDef();
     polyBd.AddShape(polySd);
+    ballBd.rotation = object.rotation;
     polyBd.position.Set(x, y);
     object.bodyRef = world.CreateBody(polyBd);
 }

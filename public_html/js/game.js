@@ -16,10 +16,10 @@ function initWorld(world) {
         object = level.objects[i];
         
         object = merge({
+            rotation : 0,
             color: '#AABBFF',
             borderColor: '#88A0FF',
             borderWidth: 1,
-            bodyRef: null,
         }, object);
         createObject(world, object);
         
@@ -48,8 +48,4 @@ Event.observe(window, 'load', function() {
     canvasLeft = parseInt(canvasElm.style.left);
 
     step();
-});
-
-Event.observe(window, 'click', function() {
-    level.objects[3].bodyRef.m_position.Set(500, 100);
 });
