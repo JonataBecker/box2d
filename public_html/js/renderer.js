@@ -67,17 +67,7 @@ function renderObject(context, object) {
             context.lineTo(- w, - h);
             break;
         case 'poly':
-            // WTFF???
-            smx = 0;
-            smy = 0;
-            for (i = 0; i < object.points.length; i++) {
-                smx += object.points[i][0];
-                smy += object.points[i][1];
-            }
-            smx /= object.points.length;
-            smy /= object.points.length;
-            center = [smx, smy];
-//            center = centerPoint(object.points);
+            center = centerPoint(object.points);
             // Primeiro ponto
             context.moveTo(object.points[0][0] - center[0], object.points[0][1] - center[1]);
             for(i = object.points.length - 1; i >= 0; i--) {

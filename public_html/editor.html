@@ -10,7 +10,7 @@ CopyRight Rech Informática Ltda. Todos os direitos reservados.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/editor.css" rel="stylesheet">		
+        <link href="css/editor.css" rel="stylesheet">
 
         <script src="js/lib/prototype-1.6.0.2.js"></script>
         <!-- Declaração de classes do Box2D. Manter nesta ordem -->
@@ -81,20 +81,34 @@ CopyRight Rech Informática Ltda. Todos os direitos reservados.
         <script src="js/jquery-2.1.1.min.js"></script>
         <script>
             $.noConflict();
-        </script>		
+
+
+            jQuery(document).ready(function(){
+                jQuery('#bola').click(function(e){
+
+                    console.log(e);
+                    e.preventDefault();
+                    addBola();
+
+
+                });
+
+            });
+
+        </script>
+        <script src='js/math.js'></script>
         <script src='js/utils.js'></script>
         <script src='js/renderer.js'></script>
         <script src='js/testlevel.js'></script>
         <script src='js/objectFactory.js'></script>
         <script src='js/editor.js'></script>
         <script src='js/palco.js'></script>
-        <!--<script src='js/game.js'></script>-->
     </head>
     <body>
         <div class="main">
             <div class="painel">
                 <ul>
-                    <li><a href="" title="">1</a></li>
+                    <li><a href="" title="" id="bola">1</a></li>
                     <li><a href="" title="">2</a></li>
                     <li><a href="" title="">3</a></li>
                     <li class="sep"></li>

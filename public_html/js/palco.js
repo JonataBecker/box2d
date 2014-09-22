@@ -1,6 +1,6 @@
 /**
  * Classe responsável pelo desenho do palco
- * 
+ *
  * @param width
  * @param height
  */
@@ -58,10 +58,11 @@ var Palco = function(width, height) {
         // Define tamanho do palco
         jQuery(".palco canvas").attr("width", palco.width);
         jQuery(".palco canvas").attr("height", palco.height);
+        renderPalco();
     };
     return {
         draw:function(){
-            palco.ajustaTamanho();            
+            palco.ajustaTamanho();
             palco.drawPalco();
         }
     };

@@ -6,23 +6,32 @@ var canvasTop;
 var canvasLeft;
 var teste;
 
-Event.observe(window, 'load', function() {
-    
+jQuery(document).ready( function() {
+
     for(i = 0; i < level.objects.length; i++) {
         object = level.objects[i];
-        
+
         object = merge({
             rotation : 0,
             color: '#AABBFF',
             borderColor: '#88A0FF',
-            borderWidth: 1,
+            borderWidth: 1
         }, object);
-        
+
         level.objects[i] = object;
     }
-
-    
-    ctx = $('canvas').getContext('2d');
+    ctx = jQuery('canvas')[0].getContext('2d');
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     render(ctx);
 });
+
+var renderPalco = function() {
+    render(ctx);
+};
+
+
+var addBola = function() {
+    level.objects.push({ shape: 'ball', x : 30, y : 200, radius : 25, static: false, color: '#33FF33', borderColor: '#008000'});
+    ctx.clearRect(0, 0, 800, 600);
+    renderPalco();
+};
