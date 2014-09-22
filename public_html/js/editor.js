@@ -29,9 +29,19 @@ var renderPalco = function() {
     render(ctx);
 };
 
+var eml;
 
 var addBola = function() {
-    level.objects.push({ shape: 'ball', x : 30, y : 200, radius : 25, static: false, color: '#33FF33', borderColor: '#008000'});
+    eml = { shape: 'ball', x : 30, y : 200, radius : 25, static: false, color: '#33FF33', borderColor: '#008000'};
+};
+
+
+var addEml = function(posX, posY) {
+    eml.x = posX;
+    eml.y = posY;
+
+    level.objects.push(eml);
     ctx.clearRect(0, 0, 800, 600);
     renderPalco();
+
 };
