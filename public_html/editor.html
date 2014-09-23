@@ -81,29 +81,14 @@ CopyRight Rech Informática Ltda. Todos os direitos reservados.
         <script src="js/jquery-2.1.1.min.js"></script>
         <script>
             $.noConflict();
-
-
-            jQuery(document).ready(function(){
-                jQuery('#bola').click(function(e){
-
-                    console.log(e);
-                    e.preventDefault();
-                    addBola();
-
-
-                });
-
-                jQuery('#palco').click(function(e) {
-                    addEml(e.offsetX, e.offsetY);
-                });
-            });
-
         </script>
         <script src='js/math.js'></script>
         <script src='js/utils.js'></script>
         <script src='js/renderer.js'></script>
         <script src='js/level.js'></script>
         <script src='js/objectFactory.js'></script>
+        <script src='js/eventController.js'></script>
+        <script src='js/circController.js'></script>
         <script src='js/editor.js'></script>
         <script src='js/palco.js'></script>
     </head>
