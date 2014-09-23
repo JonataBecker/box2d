@@ -14,7 +14,7 @@ function setupWorld() {
 function initWorld(world) {
     for(i = 0; i < level.objects.length; i++) {
         object = level.objects[i];
-        
+    
         object = merge({
             rotation : 0,
             color: '#AABBFF',
@@ -22,7 +22,7 @@ function initWorld(world) {
             borderWidth: 1,
         }, object);
         createObject(world, object);
-        
+    
         level.objects[i]= object;
     }
 
