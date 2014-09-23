@@ -7,19 +7,9 @@ var canvasLeft;
 var teste;
 
 jQuery(document).ready( function() {
+    level = new Level();
+    level.load('data/level1.json');
 
-    for(i = 0; i < level.objects.length; i++) {
-        object = level.objects[i];
-
-        object = merge({
-            rotation : 0,
-            color: '#AABBFF',
-            borderColor: '#88A0FF',
-            borderWidth: 1
-        }, object);
-
-        level.objects[i] = object;
-    }
     ctx = jQuery('canvas')[0].getContext('2d');
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     render(ctx);

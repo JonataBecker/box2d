@@ -20,14 +20,16 @@ var Level = function() {
             dataType: 'json',
             success: function(response) {
                 for(var i = 0; i < response.objects.length; i++) {
-                    level.objects[i] = merge(response.objects[i], defaultObject);
+                    level.objects[i] = merge(defaultObject, response.objects[i]);
                 }
             }
         });
     };
     // Exporta as funções públicas
     return {
+
         objects: level.objects,
+        
         load: function(url) {
             level.loadFrom(url);
         }

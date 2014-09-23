@@ -12,20 +12,13 @@ function setupWorld() {
 }
 
 function initWorld(world) {
-    for(i = 0; i < level.objects.length; i++) {
-        object = level.objects[i];
-    
-        object = merge({
-            rotation : 0,
-            color: '#AABBFF',
-            borderColor: '#88A0FF',
-            borderWidth: 1,
-        }, object);
-        createObject(world, object);
-    
-        level.objects[i]= object;
-    }
 
+    level = new Level();
+    level.load('data/level1.json');
+
+    for(i = 0; i < level.objects.length; i++) {
+        createObject(world, level.objects[i]);
+    }
 };
 
 function step(cnt) {
