@@ -17,7 +17,7 @@ function initWorld(world) {
     level.load('data/level1.json');
 
     for(i = 0; i < level.objects.length; i++) {
-        createObject(world, level.objects[i]);
+        createObject(world, level.objects[i], level);
     }
 };
 

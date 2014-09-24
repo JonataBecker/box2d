@@ -19,15 +19,11 @@ function createWorld() {
  *
  * @param {b2World} world
  * @param {type} object
+ * @param {Level} level
  */
-function createObject(world, object) {
+function createObject(world, object, level) {
     // Avalia o tipo do objeto
     switch (object.shape) {
-
-        case 'shape':
-            createPlayer(world, object);
-            break;
-
         case 'rect':
             createRect(world, object);
             break;
@@ -37,7 +33,154 @@ function createObject(world, object) {
         case 'poly':
             createPoly(world, object);
             break;
+        case 'capsule':
+            createCapsule(world, object);
+            break;
+        case 'hinge':
+            createHingeJoint(world, object, level);
+            break;
+        case 'player':
+            createPlayer(world, object, level);
+            break;
     }
+}
+
+/**
+ * Cria o jogador
+ * 
+ * @param {b2World} world
+ * @param {type} object
+ * @param {Level} level
+ */
+function createPlayer(world, object, level) {
+    
+    var i = level.pushObject({
+            id: 9991,
+            shape: "capsule",
+            x: object.x,
+            y: object.y,
+            width: 25,
+            height: 50,
+            radius: 25,
+            static: false,
+            color: "#FFFFFF",
+            borderColor: "#DDDDDD"
+    });
+
+    level.pushObject({
+            id: 9992,
+            shape: "capsule",
+            x: object.x,
+            y: object.y - 50,
+            width: 25,
+            height: 50,
+            radius: 25,
+            static: false,
+            color: "#FFFFFF",
+            borderColor: "#DDDDDD"
+    });
+
+    level.pushObject({
+            id: 9993,
+            shape: "hinge",
+            x: object.x,
+            y: object.y - 25,
+            object1: 9991,
+            object2: 9992,
+    });
+
+    var i = level.pushObject({
+            id: 9994,
+            shape: "capsule",
+            x: object.x,
+            y: object.y,
+            width: 25,
+            height: 50,
+            radius: 25,
+            static: false,
+            color: "#FFFFFF",
+            borderColor: "#DDDDDD"
+    });
+
+    level.pushObject({
+            id: 9995,
+            shape: "capsule",
+            x: object.x,
+            y: object.y - 50,
+            width: 25,
+            height: 50,
+            radius: 25,
+            static: false,
+            color: "#FFFFFF",
+            borderColor: "#DDDDDD"
+    });
+
+    level.pushObject({
+            id: 9996,
+            shape: "hinge",
+            x: object.x,
+            y: object.y - 25,
+            object1: 9994,
+            object2: 9995,
+    });
+    
+    level.pushObject({
+            id: 9997,
+            shape: "capsule",
+            x: object.x,
+            y: object.y - 100,
+            width: 25,
+            height: 50,
+            radius: 25,
+            static: false,
+            color: "#FFFFFF",
+            borderColor: "#DDDDDD"
+    });
+
+
+    level.pushObject({
+            id: 9998,
+            shape: "hinge",
+            x: object.x,
+            y: object.y - 75,
+            object1: 9992,
+            object2: 9997,
+    });
+    level.pushObject({
+            id: 9999,
+            shape: "hinge",
+            x: object.x,
+            y: object.y - 75,
+            object1: 9995,
+            object2: 9997,
+    });
+    
+    level.pushObject({
+            id: 10000,
+            shape: "ball",
+            x: object.x,
+            y: object.y - 150,
+            radius: 25,
+            static: false,
+            color: "#FFFFFF",
+            borderColor: "#DDDDDD"
+    });
+    level.pushObject({
+            id: 9999,
+            shape: "hinge",
+            x: object.x,
+            y: object.y - 125,
+            object1: 10000,
+            object2: 9997,
+    });
+
+    var f = i;
+    
+    
+    for(var j = i - 1; j < f - 1; j++) {
+        createObject(world, level.objects[i - 1], level);
+    }
+    
 }
 
 /**
@@ -107,5 +250,81 @@ function createPoly(world, object) {
     polyBd.rotation = object.rotation;
     polyBd.position.Set(object.x, object.y);
     object.bodyRef = world.CreateBody(polyBd);
+};
+
+/**
+ * Cria uma cápsula
+ *
+ * @param {type} world
+ * @param {type} object
+ */
+function createCapsule(world, object) {
+    var boxSd = new b2BoxDef();
+    if (!object.static)
+        boxSd.density = 1.0;
+    boxSd.extents.Set(object.width / 2, object.height / 2);
+    
+    
+    boxSd.restitution = 0.2;
+    boxSd.userData = object;
+
+    var ballBd = new b2BodyDef();
+    ballBd.AddShape(boxSd);
+
+    ballBd.position.Set(object.x, object.y);
+    ballBd.rotation = object.rotation;
+
+    var ballSd = new b2CircleDef();
+    if (!object.static)
+        ballSd.density = 1.0;
+    ballSd.radius = object.width / 2;
+    ballSd.restitution = 0.2;
+    ballSd.userData = object;
+    ballSd.localPosition.Set(0, - object.height / 2);
+    
+    ballBd.AddShape(ballSd);
+
+    var ballSd2 = new b2CircleDef();
+    if (!object.static)
+        ballSd2.density = 1.0;
+    ballSd2.radius = object.width / 2;
+    ballSd2.restitution = 0.2;
+    ballSd2.userData = object;
+    ballSd2.localPosition.Set(0, object.height / 2);
+    
+    ballBd.AddShape(ballSd2);
+
+    ballBd.rotation = object.rotation;
+    ballBd.position.Set(object.x, object.y);
+    
+    object.bodyRef = world.CreateBody(ballBd);
+};
+
+/**
+ * Cria uma junção rotatória
+ * 
+ * @param {type} world
+ * @param {type} object
+ * @param {Level} level
+ */
+function createHingeJoint(world, object, level) {
+
+    var body1 = getBodyById(world, level, object.object1);
+    var body2 = getBodyById(world, level, object.object2);
+
+    var jointDef = new b2RevoluteJointDef();
+    jointDef.body1 = body1;
+    jointDef.body2 = body2;
+    jointDef.anchorPoint.Set(object.x, object.y);
+    object.bodyRef = world.CreateJoint(jointDef);
+
+};
+
+function getBodyById(world, level, id) {
+    var object = level.getObjectById(id);
+    if(object === undefined) {
+        return world.GetGroundBody();
+    } else {
+        return object.bodyRef;
+    }
 }
-;
