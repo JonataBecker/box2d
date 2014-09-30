@@ -15,3 +15,13 @@ function centerPoint(pointArray) {
     smy /= pointArray.length;
     return [smx, smy];
 }
+
+/**
+ * Converte um angulo para radiano
+ * 
+ * @param {type} angle
+ * @returns {Number}
+ */
+function angleToRad(angle) {
+    return angle*Math.PI/180;
+}
