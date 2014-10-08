@@ -54,6 +54,8 @@ function createObject(world, object, level) {
  */
 function createPlayer(world, object, level) {
     
+    var player = new Player();
+    
     // Tamanhos
     var bodySize = 50;
     var upperLegSize = 50;
@@ -63,7 +65,7 @@ function createPlayer(world, object, level) {
     var headSize = 25;
     
     level.pushObject({
-            id: 9991,
+            id: player.LOWER_LEFT_LEG,
             shape: "capsule",
             x: object.x,
             y: object.y,
@@ -72,11 +74,12 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
     level.pushObject({
-            id: 9992,
+            id: player.UPPER_LEFT_LEG,
             shape: "capsule",
             x: object.x,
             y: object.y - 50,
@@ -85,20 +88,21 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
     level.pushObject({
-            id: 9993,
+            id: player.LEFT_KNEE,
             shape: "hinge",
             x: object.x,
             y: object.y - 25,
-            object1: 9991,
-            object2: 9992,
+            object1: player.LOWER_LEFT_LEG,
+            object2: player.UPPER_LEFT_LEG,
     });
 
     level.pushObject({
-            id: 9994,
+            id: player.LOWER_RIGHT_LEG,
             shape: "capsule",
             x: object.x,
             y: object.y,
@@ -107,11 +111,12 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
     level.pushObject({
-            id: 9995,
+            id: player.UPPER_RIGHT_LEG,
             shape: "capsule",
             x: object.x,
             y: object.y - 50,
@@ -120,20 +125,21 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
     level.pushObject({
-            id: 9996,
+            id: player.RIGHT_KNEE,
             shape: "hinge",
             x: object.x,
             y: object.y - 25,
-            object1: 9994,
-            object2: 9995,
+            object1: player.LOWER_RIGHT_LEG,
+            object2: player.UPPER_RIGHT_LEG,
     });
     
     level.pushObject({
-            id: 9997,
+            id: player.TORSO,
             shape: "capsule",
             x: object.x,
             y: object.y - 100,
@@ -142,30 +148,31 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
 
     level.pushObject({
-            id: 9998,
+            id: player.LEFT_THIGH,
             shape: "hinge",
             x: object.x,
             y: object.y - 75,
-            object1: 9992,
-            object2: 9997,
+            object1: player.UPPER_LEFT_LEG,
+            object2: player.TORSO,
     });
 
     level.pushObject({
-            id: 9999,
+            id: player.RIGHT_THIGH,
             shape: "hinge",
             x: object.x,
             y: object.y - 75,
-            object1: 9995,
-            object2: 9997,
+            object1: player.UPPER_RIGHT_LEG,
+            object2: player.TORSO,
     });
 
     level.pushObject({
-            id: 10000,
+            id: player.UPPER_LEFT_ARM,
             shape: "capsule",
             x: object.x - upperArmSize / 2,
             y: object.y - 125,
@@ -175,20 +182,21 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
     level.pushObject({
-            id: 10001,
+            id: player.LEFT_SHOULDER,
             shape: "hinge",
             x: object.x,
             y: object.y - 125,
-            object1: 10000,
-            object2: 9997,
+            object1: player.UPPER_LEFT_ARM,
+            object2: player.TORSO,
     });
     
     level.pushObject({
-            id: 10002,
+            id: player.LOWER_LEFT_ARM,
             shape: "capsule",
             x: object.x - upperArmSize - lowerArmSize / 2,
             y: object.y - 125,
@@ -198,20 +206,21 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
     level.pushObject({
-            id: 10003,
+            id: player.LEFT_ELBOW,
             shape: "hinge",
             x: object.x - upperArmSize,
             y: object.y - 125,
-            object1: 10000,
-            object2: 10002,
+            object1: player.UPPER_LEFT_ARM,
+            object2: player.LOWER_LEFT_ARM,
     });
 
     level.pushObject({
-            id: 10004,
+            id: player.UPPER_RIGHT_ARM,
             shape: "capsule",
             x: object.x + upperArmSize / 2,
             y: object.y - 125,
@@ -221,20 +230,21 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
     level.pushObject({
-            id: 10005,
+            id: player.RIGHT_SHOULDER,
             shape: "hinge",
             x: object.x,
             y: object.y - 125,
-            object1: 10004,
-            object2: 9997,
+            object1: player.UPPER_RIGHT_ARM,
+            object2: player.TORSO,
     });
     
     level.pushObject({
-            id: 10006,
+            id: player.LOWER_RIGHT_ARM,
             shape: "capsule",
             x: object.x + upperArmSize + lowerArmSize / 2,
             y: object.y - 125,
@@ -244,36 +254,38 @@ function createPlayer(world, object, level) {
             radius: 25,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
 
     level.pushObject({
-            id: 10007,
+            id: player.RIGHT_ELBOW,
             shape: "hinge",
             x: object.x + upperArmSize,
             y: object.y - 125,
-            object1: 10004,
-            object2: 10006,
+            object1: player.UPPER_RIGHT_ARM,
+            object2: player.LOWER_RIGHT_ARM,
     });
     
     level.pushObject({
-            id: 10008,
+            id: player.HEAD,
             shape: "ball",
             x: object.x,
             y: object.y - 150,
             radius: headSize,
             static: false,
             color: "#FFFFFF",
-            borderColor: "#DDDDDD"
+            borderColor: "#DDDDDD",
+            groupIndex: -1
     });
     
     level.pushObject({
-            id: 10009,
+            id: player.NECK,
             shape: "hinge",
             x: object.x,
             y: object.y - 150,
-            object1: 10008,
-            object2: 9997,
+            object1: player.HEAD,
+            object2: player.TORSO,
     });    
 }
 
@@ -291,6 +303,7 @@ function createRect(world, object) {
     boxSd.extents.Set(object.width / 2, object.height / 2);
     boxSd.restitution = 0.2;
     boxSd.userData = object;
+    boxSd.groupIndex = object.groupIndex;
 
     var ballBd = new b2BodyDef();
     ballBd.AddShape(boxSd);
@@ -312,6 +325,7 @@ function createBall(world, object) {
         ballSd.density = 1.0;
     ballSd.radius = object.radius || 10;
     ballSd.restitution = 0.2;
+    ballSd.groupIndex = object.groupIndex;
     ballSd.userData = object;
     var ballBd = new b2BodyDef();
     ballBd.AddShape(ballSd);
@@ -333,6 +347,7 @@ function createPoly(world, object) {
         polySd.density = 1.0;
     polySd.restitution = 0.2;
     polySd.vertexCount = object.points.length;
+    polySd.groupIndex = object.groupIndex;
     polySd.userData = object;
     for (var i = 0; i < object.points.length; i++) {
         polySd.vertices[i].Set(object.points[i][0], object.points[i][1]);
@@ -357,10 +372,9 @@ function createCapsule(world, object) {
     if (!object.static)
         boxSd.density = 1.0;
     boxSd.extents.Set(object.width / 2, object.height / 2);
-    
-    
     boxSd.restitution = 0.2;
     boxSd.userData = object;
+    boxSd.groupIndex = object.groupIndex;
 
     var ballBd = new b2BodyDef();
     ballBd.AddShape(boxSd);
@@ -375,6 +389,7 @@ function createCapsule(world, object) {
     ballSd.restitution = 0.2;
     ballSd.userData = object;
     ballSd.localPosition.Set(0, - object.height / 2);
+    ballSd.groupIndex = object.groupIndex;
     
     ballBd.AddShape(ballSd);
 
@@ -385,6 +400,7 @@ function createCapsule(world, object) {
     ballSd2.restitution = 0.2;
     ballSd2.userData = object;
     ballSd2.localPosition.Set(0, object.height / 2);
+    ballSd2.groupIndex = object.groupIndex;
     
     ballBd.AddShape(ballSd2);
 
