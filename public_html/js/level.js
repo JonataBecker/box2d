@@ -10,7 +10,8 @@ var Level = function() {
         static: false,
         color: '#AABBFF',
         borderColor: '#88A0FF',
-        borderWidth: 1
+        borderWidth: 1,
+        groupIndex: 0
     };
     // Carrega a fase
     level.loadFrom = function(url) {
