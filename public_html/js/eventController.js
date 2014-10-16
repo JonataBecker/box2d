@@ -1,19 +1,18 @@
 
 var EventController = function() {
     
-    var elemento;
+    var elemento = null;
     
     var isPossuiElemento = function() {
-        return elemento != null;
+        return elemento !== null;
     };
     
     
     jQuery('#palco').mousedown(function(e) {
         if (!isPossuiElemento()) {
             return;
-        } 
-        
-        elemento.mousedown(e.offsetX, e.offsetY);
+        }
+        elemento.mousedown(e.pageX, e.pageY);
         renderPalco();
     });
     
@@ -22,7 +21,6 @@ var EventController = function() {
         if (!isPossuiElemento()) {
             return;
         } 
-        
         elemento.mouseup(e.offsetX, e.offsetY);
         renderPalco();
     });
@@ -30,9 +28,8 @@ var EventController = function() {
     jQuery('#palco').mousemove(function(e) {
         if (!isPossuiElemento()) {
             return;
-        } 
-        
-        elemento.mousemove(e.offsetX, e.offsetY);
+        }
+        elemento.mousemove(e.pageX, e.pageY);
         renderPalco();
     });
     

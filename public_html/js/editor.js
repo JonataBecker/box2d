@@ -20,8 +20,11 @@ var renderPalco = function() {
 };
 
 jQuery(document).ready(function(){
-    jQuery('#bola').click(function(e){
+    jQuery('.painel a').click(function(e){
         e.preventDefault();
+        jQuery('.painel a').removeClass("sel");
+        jQuery(this).addClass("sel");
+        
         eventController.setElemento(new CircController(level));
     });
 });

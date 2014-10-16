@@ -29,7 +29,10 @@ var CircController = function(level) {
         if (!isCreate) {
             return;
         }
+         console.log(posX)
         obj.options.radius = Math.abs(obj.options.x - posX);
+        
+       
     };
 
 

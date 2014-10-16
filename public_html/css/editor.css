@@ -10,10 +10,10 @@ ul {
     height:100%; 
     overflow:hidden; 
     position:relative; 
-    padding: 0 0 0 90px;
+    padding: 0 0 0 65px;
 }
 .painel{
-    width:90px; 
+    width:65px; 
     height:100%;
     background:#5B5B5B; 
     position: absolute; 
@@ -24,7 +24,7 @@ ul {
     margin: 12px 0 0 12px;
 }
 .painel ul li {
-    margin: 0 10px 10px 0;
+    margin: 0 0 10px 0;
     float: left;
 }
 .painel ul li.sep { 
@@ -34,14 +34,15 @@ ul {
     background:#3B3B3B;
 }
 .painel ul li a {
-    width:25px;
-    height:25px;
+    width:35px;
+    height:35px;
     display:table-cell;
     text-align:center;
     vertical-align:middle;
     border-radius: 3px;
 }
-.painel ul li a:hover {
+.painel ul li a:hover,
+.painel ul li a.sel{
     background:#3B3B3B;
     text-decoration:none;
 }

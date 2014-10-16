@@ -1,3 +1,19 @@
-.glyphicon-circle{
-    background: url('../img/glyphicons/glyphicons_095_vector_path_circle.png');
+.glyphicon-bt {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.glyphicon-circle {
+    background-image: url('../img/glyphicons/glyphicons_095_vector_path_circle.png');
+}
+
+.glyphicon-square {
+    background-image: url('../img/glyphicons/glyphicons_094_vector_path_square.png');
+}
+
+.glyphicon-polygon {
+    background-image: url('../img/glyphicons/glyphicons_096_vector_path_polygon.png');
 }
