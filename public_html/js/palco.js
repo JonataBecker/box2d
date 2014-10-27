@@ -10,7 +10,10 @@ var Palco = (function() {
     palco.posY = 0;
     palco.boxExt = 30;
     palco.boxInt = 10;
-    // Desenha tela
+    palco.obj = null;
+    /**
+     * Desenha tela
+     */
     palco.drawPalco = function() {
         palco.drawing = document.getElementById("palco_background");
         var w = Math.ceil(palco.width / palco.boxExt);
@@ -26,7 +29,12 @@ var Palco = (function() {
             }
         }
     };
-    // Desenha box interno
+    /**
+     * Desenha box interno
+     * 
+     * @param {int} posXExt
+     * @param {int} posYExt
+     */
     palco.drawBoxInt = function(posXExt, posYExt) {
         var s = Math.ceil(palco.boxExt / palco.boxInt);
         // Percorre box externo
@@ -38,14 +46,23 @@ var Palco = (function() {
             }
         }
     };
-    // Desenha box
+    /**
+     * Desenha box
+     * 
+     * @param {int} posX
+     * @param {int} posY
+     * @param {int} lineWidth
+     * @param {int} size
+     */
     palco.drawBox = function(posX, posY, lineWidth, size) {
         var con = palco.drawing.getContext("2d");
         con.strokeStyle = "#999";
         con.lineWidth = lineWidth;
         con.strokeRect(posX, posY, size, size);
     };
-    // Ajusta tamanho do palco
+    /**
+     * Ajusta tamanho do palco
+     */
     palco.ajustaTamanho = function() {
         var boxWidth = jQuery('.box_palco').width();
         var boxHeight= jQuery('.box_palco').height();
@@ -84,6 +101,12 @@ var Palco = (function() {
         },
         getHeight: function() {
             return palco.height;
+        },
+        getObj: function() {
+            if (palco.obj === null) {
+                palco.obj = jQuery('#palco');
+            }
+            return palco.obj;
         }
     };
 }());

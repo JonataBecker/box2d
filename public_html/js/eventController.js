@@ -1,8 +1,15 @@
-
+/**
+ * Classe responsável controle de eventos
+ */
 var EventController = function() {
-    
+    /** Evento em seleção */
     var elemento = null;
-    
+    /**
+     * Retorna posição 
+     * 
+     * @param {int} e
+     * @returns {EventController.getPosicao.posicao}
+     */
     var getPosicao = function(e) {
         var posicao = {
             pageX: e.pageX - Palco.getPosXMenu(),
@@ -10,13 +17,20 @@ var EventController = function() {
         };
         return posicao;
     };
-    
+    /**
+     * Retorna se possui elemento selecionado
+     * 
+     * @returns {Boolean}
+     */
     var isPossuiElemento = function() {
         return elemento !== null;
     };
-    
-    
-    jQuery('#palco').mousedown(function(e) {
+    /**
+     * Adiciona evento de clique down do mouse
+     * 
+     * @param e
+     */
+    Palco.getObj().mousedown(function(e) {
         if (!isPossuiElemento()) {
             return;
         }
@@ -24,17 +38,24 @@ var EventController = function() {
         elemento.mousedown(posicao.pageX, posicao.pageY);
         renderPalco();
     });
-    
-    
-    jQuery('#palco').mouseup(function(e) {
+    /**
+     * Adiciona evento de cliente up do mouse
+     * 
+     * @param e
+     */
+    Palco.getObj().mouseup(function(e) {
         if (!isPossuiElemento()) {
             return;
         } 
         elemento.mouseup(e.offsetX, e.offsetY);
         renderPalco();
     });
-    
-    jQuery('#palco').mousemove(function(e) {
+    /**
+     * Adiciona evento de mouse move
+     * 
+     * @param e
+     */
+    Palco.getObj().mousemove(function(e) {
         if (!isPossuiElemento()) {
             return;
         }
@@ -42,8 +63,6 @@ var EventController = function() {
         elemento.mousemove(posicao.pageX, posicao.pageY);
         renderPalco();
     });
-    
-  
     return  {
         setElemento: function(obj) {
             elemento = obj;
