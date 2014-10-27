@@ -15,7 +15,7 @@ jQuery(document).ready( function() {
 });
 
 var renderPalco = function() {
-    ctx.clearRect(0, 0, 800, 600);
+    ctx.clearRect(0, 0, Palco.getWidth(), Palco.getHeight());
     render(ctx);
 };
 

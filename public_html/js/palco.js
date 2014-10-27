@@ -1,20 +1,20 @@
 /**
  * Classe responsável pelo desenho do palco
- *
- * @param width
- * @param height
  */
-var Palco = function(width, height) {
+var Palco = (function() {
     var palco = {};
-    palco.width = width;
-    palco.height = height;
+    palco.width = 800;
+    palco.height = 600;
+    palco.posXMenu = 0;
+    palco.posX = 0;
+    palco.posY = 0;
     palco.boxExt = 30;
     palco.boxInt = 10;
     // Desenha tela
     palco.drawPalco = function() {
         palco.drawing = document.getElementById("palco_background");
-        var w = Math.ceil(width / palco.boxExt);
-        var h = Math.ceil(height / palco.boxExt);
+        var w = Math.ceil(palco.width / palco.boxExt);
+        var h = Math.ceil(palco.height / palco.boxExt);
         // Percorre box externo
         for (var x = 0; x < w; x++) {
             for (var y = 0; y < h; y++) {
@@ -49,9 +49,12 @@ var Palco = function(width, height) {
     palco.ajustaTamanho = function() {
         var boxWidth = jQuery('.box_palco').width();
         var boxHeight= jQuery('.box_palco').height();
+        palco.posX = ((boxWidth - palco.width) / 2);
+        palco.posY = ((boxHeight - palco.height) / 2);
+        palco.posXMenu = palco.posX + jQuery('#painel_menu').width();
         // Define posição do palco
-        jQuery(".palco").css({"left":((boxWidth - palco.width) / 2) + "px"});
-        jQuery(".palco").css({"top":((boxHeight - palco.height) / 2) + "px"});
+        jQuery(".palco").css({"left": palco.posX + "px"});
+        jQuery(".palco").css({"top": palco.posY + "px"});
         // Adiciona background
         jQuery("#palco_background").remove();
         jQuery(".palco").append("<canvas id='palco_background'></canvas>");
@@ -61,14 +64,30 @@ var Palco = function(width, height) {
         renderPalco();
     };
     return {
-        draw:function(){
+        draw:function(width, height){
+            palco.width = width;
+            palco.height = height;
             palco.ajustaTamanho();
             palco.drawPalco();
+        },
+        getPosXMenu: function() {
+            return palco.posXMenu;
+        },
+        getPosX: function() {
+            return palco.posX;
+        },
+        getPosY: function() {
+            return palco.posY;
+        },
+        getWidth: function() {
+            return palco.width;
+        },
+        getHeight: function() {
+            return palco.height;
         }
     };
-};
+}());
 
 jQuery(document).ready(function() {
-    var palco = new Palco(800, 600);
-    palco.draw();
+    Palco.draw(800, 600);
 });

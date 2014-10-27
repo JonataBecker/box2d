@@ -3,6 +3,14 @@ var EventController = function() {
     
     var elemento = null;
     
+    var getPosicao = function(e) {
+        var posicao = {
+            pageX: e.pageX - Palco.getPosXMenu(),
+            pageY: e.pageY - Palco.getPosY()
+        };
+        return posicao;
+    };
+    
     var isPossuiElemento = function() {
         return elemento !== null;
     };
@@ -12,7 +20,8 @@ var EventController = function() {
         if (!isPossuiElemento()) {
             return;
         }
-        elemento.mousedown(e.pageX, e.pageY);
+        var posicao = getPosicao(e);
+        elemento.mousedown(posicao.pageX, posicao.pageY);
         renderPalco();
     });
     
@@ -29,11 +38,12 @@ var EventController = function() {
         if (!isPossuiElemento()) {
             return;
         }
-        elemento.mousemove(e.pageX, e.pageY);
+        var posicao = getPosicao(e);
+        elemento.mousemove(posicao.pageX, posicao.pageY);
         renderPalco();
     });
     
-    
+  
     return  {
         setElemento: function(obj) {
             elemento = obj;

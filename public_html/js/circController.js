@@ -23,16 +23,14 @@ var CircController = function(level) {
     obj.mouseup = function(posX, posY) {
         isCreate = false;
     };
-
-
+    
     obj.mousemove = function(posX, posY) {
         if (!isCreate) {
             return;
         }
-         console.log(posX)
-        obj.options.radius = Math.abs(obj.options.x - posX);
         
-       
+        console.log(obj.options.x + "-" + posX);
+        obj.options.radius = Math.abs(obj.options.x - posX);
     };
 
 
