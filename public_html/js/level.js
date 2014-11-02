@@ -4,6 +4,7 @@
 var Level = function() {
     var level = {};
     level.objects = [];
+    level.player = undefined;
     // Objeto com propriedades default
     var defaultObject = {
         rotation : 0,
@@ -44,6 +45,7 @@ var Level = function() {
     return {
 
         objects: level.objects,
+        player: level.player,
         
         load: function(url) {
             level.loadFrom(url);

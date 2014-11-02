@@ -17,8 +17,13 @@ function initWorld(world) {
     level.load('data/level1.json');
 
     for(i = 0; i < level.objects.length; i++) {
-        createObject(world, level.objects[i], level);
+        if(level.objects[i].shape === 'player') {
+            level.player = createObject(world, level.objects[i], level);
+        } else {
+            createObject(world, level.objects[i], level);
+        }
     }
+    level.player.initHinges();
 };
 
 function step(cnt) {
@@ -29,6 +34,28 @@ function step(cnt) {
     render(ctx);
     setTimeout('step(' + (cnt || 0) + ')', 10);
 }
+
+document.addEventListener("keydown", function(event) {
+    if(event.keyCode === 37) {
+        event.preventDefault();
+        level.player.ragdollLeft();
+    }
+    if(event.keyCode === 39) {
+        event.preventDefault();
+        level.player.ragdollRight();
+    }
+    if(event.keyCode === 38) {
+        event.preventDefault();
+        level.player.ragdollUp();
+    }
+    if(event.keyCode === 40) {
+        event.preventDefault();
+        level.player.ragdollDown();
+    }
+}, false);
+document.addEventListener("keyup", function(event) {
+    level.player.ragdollRelease();
+}, false);
 
 Event.observe(window, 'load', function() {
     setupWorld();

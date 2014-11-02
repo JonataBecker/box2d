@@ -40,7 +40,7 @@ function createObject(world, object, level) {
             createHingeJoint(world, object, level);
             break;
         case 'player':
-            createPlayer(world, object, level);
+            return createPlayer(world, object, level);
             break;
     }
 }
@@ -174,7 +174,7 @@ function createPlayer(world, object, level) {
     level.pushObject({
             id: player.UPPER_LEFT_ARM,
             shape: "capsule",
-            x: object.x - upperArmSize / 2,
+            x: object.x + upperArmSize / 2,
             y: object.y - 125,
             width: 25,
             height: upperArmSize,
@@ -198,7 +198,7 @@ function createPlayer(world, object, level) {
     level.pushObject({
             id: player.LOWER_LEFT_ARM,
             shape: "capsule",
-            x: object.x - upperArmSize - lowerArmSize / 2,
+            x: object.x + upperArmSize + lowerArmSize / 2,
             y: object.y - 125,
             width: 25,
             height: lowerArmSize,
@@ -213,7 +213,7 @@ function createPlayer(world, object, level) {
     level.pushObject({
             id: player.LEFT_ELBOW,
             shape: "hinge",
-            x: object.x - upperArmSize,
+            x: object.x + upperArmSize,
             y: object.y - 125,
             object1: player.UPPER_LEFT_ARM,
             object2: player.LOWER_LEFT_ARM,
@@ -286,7 +286,9 @@ function createPlayer(world, object, level) {
             y: object.y - 150,
             object1: player.HEAD,
             object2: player.TORSO,
-    });    
+    });   
+    return player;
+    
 }
 
 /**
