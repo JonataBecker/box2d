@@ -5,6 +5,7 @@ var canvasHeight;
 var canvasTop;
 var canvasLeft;
 var teste;
+var keyMap = [];
 
 function setupWorld() {
     world = createWorld();
@@ -36,6 +37,9 @@ function step(cnt) {
 }
 
 document.addEventListener("keydown", function(event) {
+    // Registra no KeyMap
+    keyMap[event.keyCode] = true;
+    
     if(event.keyCode === 37) {
         event.preventDefault();
         level.player.ragdollLeft();
@@ -53,7 +57,11 @@ document.addEventListener("keydown", function(event) {
         level.player.ragdollDown();
     }
 }, false);
+
 document.addEventListener("keyup", function(event) {
+    // Registra no KeyMap
+    keyMap[event.keyCode] = false;
+
     level.player.ragdollRelease();
 }, false);
 

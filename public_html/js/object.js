@@ -20,6 +20,8 @@ var Object = function() {
     object.borderColor = '#88A0FF';
     /** Largura da borda */
     object.borderWidth = 1;
+    /** Referência ao corpo físico do objeto */
+    object.bodyRef = null;
     
     /**
      * Verifica se colidiu com o hitbox do objeto
@@ -40,8 +42,37 @@ var Object = function() {
     object.render = function(context) {
         
     };
+
+    /**
+     * Atualiza o objeto em um tick do jogo
+     */
+    object.tick = function() {
+        
+    };
     
-    // Protótipação
+    /**
+     * Cria o corpo físico deste objeto
+     * 
+     * @param world
+     */
+    object.buildPhysicsBody = function(world) {
+        var boxSd = new b2BoxDef();
+        if (!object.static)
+            boxSd.density = 1.0;
+        boxSd.extents.Set(object.width / 2, object.height / 2);
+        boxSd.restitution = 0.2;
+        boxSd.userData = object;
+        boxSd.groupIndex = object.groupIndex;
+
+        var ballBd = new b2BodyDef();
+        ballBd.AddShape(boxSd);
+
+        ballBd.position.Set(object.x, object.y);
+        ballBd.rotation = angleToRad(object.rotation);
+        object.bodyRef = world.CreateBody(ballBd);
+    };
+    
+    // Prototipação
     return {
         /**
          * Verifica se colidiu com o hitbox do objeto
@@ -60,6 +91,20 @@ var Object = function() {
          */
         render: function(context) {
             object.context(context);
+        },
+        /**
+         * Atualiza o objeto em um tick do jogo
+         */
+        tick: function() {
+            object.tick();
+        },
+        /**
+         * Cria o corpo físico deste objeto
+         * 
+         * @param world
+         */
+        buildPhysicsBody: function(world) {
+            object.buildPhysicsBody(world);
         },
         /**
          * Posição horizontal
@@ -158,6 +203,20 @@ var Object = function() {
          */
         setBorderColor: function(borderColor) {
             object.borderColor = borderColor;
-        }
+        },
+        /**
+         * Retorna a referência do corpo físico
+         */
+        getBodyRef: function() {
+            return object.bodyRef;
+        },
+        /**
+         * Define a referência do corpo físico
+         * 
+         * @param bodyRef
+         */
+        setBodyRef: function(bodyRef) {
+            object.bodyRef = bodyRef;
+        }        
     };
 };
